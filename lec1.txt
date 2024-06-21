@@ -1,0 +1,83 @@
+/*CREATE TABLE employee(name varchar(50),salary int primary key);
+INSERT into employee(name,salary) values ("adam",25000),("bob",30000),("casey",40000);
+SELECT*FROM employee;*/
+
+/*CREATE TABLE temp1(id int unique);
+INSERT into temp1(id)values (101),(101);
+SELECT*FROM temp1;
+CREATE TABLE temp1(id int primary key);
+INSERT into temp1(id)values (101),(101);
+SELECT*FROM temp1;
+
+CREATE TABLE emp(id int,salary int DEFAULT 25000);
+INSERT INTO emp(id)values (101);
+SELECT*FROM emp;*/
+
+CREATE TABLE student(rollno int primary key,name varchar(50),marks int not null,grade varchar(1),city varchar(50));
+INSERT INTO student(rollno,name,marks,grade,city) values (101,"anil","78","c","pune"),(102,"bhumika","93","a","mumbai"),(103,"chetan","85","b","mumbai"),(104,"dhruv","96","a","delhi"),(105,"emanuel","12","f","delhi"),(106,"farah","82","b","delhi");
+/*SELECT*FROM student;
+SELECT name,marks from student;
+SELECT distinct city from student;
+SELECT*FROM student WHERE marks>=80;
+SELECT * FROM student WHERE city="mumbai";
+SELECT*FROM student WHERE marks+10>100;
+SELECT*FROM student WHERE marks=93;
+SELECT*FROM student WHERE marks>93;
+
+SELECT*FROM student WHERE marks>=80 and city="mumbai";
+SELECT*FROM student WHERE marks>=80 or city="mumbai";
+SELECT*FROM student WHERE marks between 80 AND 90;
+SELECT*FROM student WHERE city IN ("delhi","mumbai","gurgaon");
+SELECT*FROM student WHERE city NOT IN("delhi");
+
+SELECT*FROM student WHERE marks>75 ;
+SELECT*FROM student WHERE marks>75 LIMIT 3;
+
+SELECT*FROM student ORDER BY city ASC;
+SELECT*FROM student ORDER BY marks ASC LIMIT 3;
+SELECT*FROM student ORDER BY marks DESC;
+
+SELECT MAX(marks) from student;
+SELECT MIN(marks) from student;
+SELECT AVG(marks) from student;
+SELECT count(name) from student;
+
+SELECT city FROM student GROUP by city;
+SELECT city ,count(name) from student group by city;
+SELECT city,name FROM student GROUP BY city,name 
+SELECT grade, count(rollno) FROM student GROUP BY grade order by grade asc;
+
+practice question
+
+write a query to find avg marks in each city in ascending ORDER
+SELECT city, AVG(marks) FROM student GROUP BY city ORDER BY city ASC;
+
+SELECT city, AVG(marks) FROM student GROUP BY city ORDER BY AVG(marks) ASC;
+for a given table, find the total payment according toneach payment method
+SELECT mode, count(id) FROM payment GROUP BY mode; 
+
+SELECT grade,count(rollno) from student group by grade order by grade;
+
+SELECT city FROM student group by city;
+SELECT count(name),city FROM student group by city;
+SELECT city,count(rollno) FROM student GROUP BY city HAVING max(marks)>90;
+SELECT city FROM student WHERE grade="a"GROUP BY city HAVING MAX(marks)>=93 ORDER BY city DESC;
+
+UPDATE student SET grade="o" WHERE grade="a";
+SELECT*FROM student;
+UPDATE student SET grade="b" WHERE marks BETWEEN 80 AND 90;
+SELECT*FROM student;
+UPDATE student SET marks=marks+1;
+SELECT*FROM student;
+
+DELETE FROM student WHERE marks<33;
+SELECT*FROM student;
+
+revisiting foreign key
+CREATE TABLE course(id int primary key,name varchar(50));
+INSERT into course(id,name)values(101,"kashish"),(102,"priya");
+SELECT*FROM course;
+
+CREATE TABLE teacher(id int primary key,name varchar(50),dept_id int);
+INSERT INTO teacher(id,name,dept_id)values(101,"bob",106),(102,"tina",109),(103,"tiya",106),(104,"lily",103);
+SELECT * FROM teacher;*/
