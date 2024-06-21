@@ -1,0 +1,100 @@
+CREATE TABLE customers(customerid int primary key, customername varchar(50) NOT NULL);
+CREATE TABLE orders(orderid int primary key,orderno int not null,customerid int, foreign key(customerid) references customers(customerid));
+INSERT INTO customers(customerid,customername) values(1,"john"),(2,"roy"),(3,"toy");
+insert into orders(orderid,orderno,customerid) values(1,101,1),(2,102,2),(3,301,3);
+select*from customers;
+select*from orders;
+/*insert into customers(customerid,customername) values(4,"kashish");
+insert into values(orderid,orderno,customerid) values(4,108,4),
+select * from customers;*/
+CREATE TABLE employee1(employeeid int,name char(20),country char(20));
+CREATE TABLE employee2(employeeid int,name char(20),country char(20));
+insert into employee1(employeeid,name,country) values(1,"shub","india"),(2,"aman","australia"),(3,"naveen","sri lanka"),(4,"aditya","austria");
+insert into employee2(employeeid,name,country) values(1,"tommy","england"),(2,"allen","france"),(3,"nancy","india"),(4,"adi","ireland");
+select*from employee1;
+select*from employee2;
+select country from employee1 union select country from employee2 order by country;
+select country from empolyee1 Except select country from employee2;
+select country from employee1 intercept select country from employee2;
+
+select*from employee1 as a inner join employee2 as b on a.employeeid=b.employeeid;
+
+select*from employee1 as a left join employee2 as b on a.employeeid=b.employeeid;
+select*from employee1 as a right join employee2 as b on a.employeeid=b.employeeid;
+select*from employee1 as a Full outer  join employee2 as b on a.employeeid=b.employeeid;
+select*from employee1 full outer join employee2;
+
+
+select name,country from employee1 as a inner join employee2 as b on a.employeeid=b.employeeid;*/
+CREATE TABLE new(new_id int,new_cat char(20));
+insert into new(new_id,new_cat) values (100,"agni"),(200,"agni"),(500,"dharti"),(700,"dharti"),(200,"vayu"),(300,"vayu"),(500,"vayu");
+
+select new_id,new_cat,
+SUM(new_id) OVER(partition by new_cat order by new_id) as "total",
+AVG(new_id) OVER(partition by new_cat order by new_id)as "average",
+COUNT(new_id) OVER(partition by new_cat order by new_id)as "count",
+MIN(new_id) OVER(partition by new_cat order by new_id)as "min",
+MAX(new_id) OVER(partition by new_cat order by new_id)as "max"
+from new;
+
+select new_id,new_cat,
+SUM(new_id) OVER(order by new_id rows between unbounded preceding and unbounded following) as "total",
+avg(new_id) OVER(order by new_id rows between unbounded preceding and unbounded following) as "average",
+count(new_id) OVER(order by new_id rows between unbounded preceding and unbounded following) as "count",
+min(new_id) OVER(order by new_id rows between unbounded preceding and unbounded following) as "min",
+max(new_id) OVER(order by new_id rows between unbounded preceding and unbounded following) as "max",
+from new;
+
+
+
+
+
+
+
+
+
+Output:
+
++------------+--------------+
+| customerid | customername |
++------------+--------------+
+|          1 | john         |
+|          2 | roy          |
+|          3 | toy          |
++------------+--------------+
++---------+---------+------------+
+| orderid | orderno | customerid |
++---------+---------+------------+
+|       1 |     101 |          1 |
+|       2 |     102 |          2 |
+|       3 |     301 |          3 |
++---------+---------+------------+
++------------+--------+-----------+
+| employeeid | name   | country   |
++------------+--------+-----------+
+|          1 | shub   | india     |
+|          2 | aman   | australia |
+|          3 | naveen | sri lanka |
+|          4 | aditya | austria   |
++------------+--------+-----------+
++------------+-------+---------+
+| employeeid | name  | country |
++------------+-------+---------+
+|          1 | tommy | england |
+|          2 | allen | france  |
+|          3 | nancy | india   |
+|          4 | adi   | ireland |
++------------+-------+---------+
++--------+---------+-------+----------+-------+------+------+
+| new_id | new_cat | total | average  | count | min  | max  |
++--------+---------+-------+----------+-------+------+------+
+|    100 | agni    |   100 | 100.0000 |     1 |  100 |  100 |
+|    200 | agni    |   300 | 150.0000 |     2 |  100 |  200 |
+|    500 | dharti  |   500 | 500.0000 |     1 |  500 |  500 |
+|    700 | dharti  |  1200 | 600.0000 |     2 |  500 |  700 |
+|    200 | vayu    |   200 | 200.0000 |     1 |  200 |  200 |
+|    300 | vayu    |   500 | 250.0000 |     2 |  200 |  300 |
+|    500 | vayu    |  1000 | 333.3333 |     3 |  200 |  500 |
++--------+---------+-------+----------+-------+------+------+
+
+ERROR 1064 (42000) at line 40: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from new' at line 7
